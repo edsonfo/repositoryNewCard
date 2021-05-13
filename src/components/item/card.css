@@ -1,5 +1,7 @@
 .card-style {
   width: "280px";
   height: "550px";
-  margin: "20px"
+  margin: "20px";
+  text-align: left;
+  padding: 50px;
 }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import CardItem from "../item/CardItem";
 
-import image2 from './image2.jpg';
+// import image2 from './image2.jpg';
 
 
 const Cards = (props)=> {
@@ -20,21 +20,17 @@ const Cards = (props)=> {
   const items = [
     {
       id: 1,
-      title: "Hello",
-      name: "Ortuno",
-      image: image2,
+      title: "Title",
       visible: true,
     },
     {
       id: 2,
-      title: "hi",
-      name: "Fernandez",
+      title: "Title",
       visible: true,
     },
     {
       id: 3,
-      title: "hello",
-      name: "Edson",
+      title: "Title",
       visible: true,
     }
   ]
