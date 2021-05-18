@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Col, Form } from "react-bootstrap";
+import { Card, Col, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 import "./card.css";
@@ -12,20 +12,8 @@ const CardItem = ({ item, visible }) => {
           <Card.Body>
             <Card.Text>{item.title}</Card.Text>
           </Card.Body>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox"/>
-            <Form.Control type="text" placeholder="Label text" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox"/>
-            <Form.Control type="text" placeholder="Label text" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox"/>
-            <Form.Control type="text" placeholder="Label text" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox"/>
+          <Form.Group>
+            <Form.Check type="checkbox" />
             <Form.Control type="text" placeholder="Label text" />
           </Form.Group>
         </Card>
@@ -35,6 +23,7 @@ const CardItem = ({ item, visible }) => {
 };
 
 CardItem.propTypes = {
-  CardItem: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired,
+  visible: PropTypes.bool.isRequired,
 };
 export default CardItem;

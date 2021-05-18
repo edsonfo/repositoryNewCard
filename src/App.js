@@ -1,12 +1,16 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Cards from "./components/list-item/Cards";
+import Context from "./components/context/Context";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Cards />
-    </div>
+    <Context>
+      <div className="App">
+        <Cards />
+      </div>
+    </Context>
   );
-}
+};
 
 export default App;
