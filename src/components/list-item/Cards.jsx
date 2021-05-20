@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Badge, Button, Container, Row } from "react-bootstrap";
 import CardItem from "../item/CardItem";
+import { connect } from "react-redux"
 
 // import image2 from './image2.jpg';
 
-const Cards = (props) => {
+const Cards = ({title}) => {
   const [checked, setChecked] = useState({
     checked: false,
     message: "Hide Cards",
@@ -44,6 +45,10 @@ const Cards = (props) => {
       </Button>
       {checked.checked && (
         <Container>
+          <h1>
+            <Badge variant= "primary">{title}</Badge>
+          </h1>
+          <h3>Rendering title property from redux-store = {title}</h3>
           <Row className="justify-content-md-center">
             {items.map((item, key) => (
               <CardItem key={key} item={item} visible={item.visible} />
@@ -54,4 +59,8 @@ const Cards = (props) => {
     </>
   );
 };
-export default Cards;
+const mapStateToProps = (state) => ({
+  title: state.title
+})
+
+export default connect(mapStateToProps)(Cards)
