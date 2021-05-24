@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import ContextTheme, {themes} from "./ContextTheme"
+import React, { useState } from 'react'
+import ContextTheme, {themes} from './ContextTheme'
 
 const Context = (props) => {
-  const [themeState, setThemeState] = useState(themes.light)
+  const [themeState, setThemeState] = useState(themes.dark)
   const changeTheme = () => {
     setThemeState(themeState === themes.dark ? themes.light : themes.dark)
   }

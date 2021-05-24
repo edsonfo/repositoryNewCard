@@ -1,66 +1,39 @@
-import React, { useState } from "react";
-import { Badge, Button, Container, Row } from "react-bootstrap";
-import CardItem from "../item/CardItem";
-import { connect } from "react-redux"
+import React, { useContext } from 'react'
+import { Badge, Button, Container } from 'react-bootstrap'
+import CardItem from '../item/CardItem'
+import { useDispatch, useSelector } from 'react-redux'
+import ContextTheme from '../context/ContextTheme'
+import { addItemToDoList } from  '../actions/rootActions'
 
-// import image2 from './image2.jpg';
-
-const Cards = ({title}) => {
-  const [checked, setChecked] = useState({
-    checked: false,
-    message: "Hide Cards",
-  });
-  const handleClick = () => {
-    setChecked({
-      checked: !checked.checked,
-      message: !checked.checked ? "Hide Cards" : "Show Cards",
-    });
-  };
-  const items = [
-    {
-      id: 1,
-      title: "Title",
-      visible: true,
-    },
-    {
-      id: 2,
-      title: "Title",
-      visible: true,
-    },
-    {
-      id: 3,
-      title: "Title",
-      visible: true,
-    },
-  ];
-  return (
-    <>
-      <Button
-        style={{ marginTop: "30px" }}
-        variant="primary"
-        size="lg"
-        onClick={handleClick}
-      >
-        {checked.message}
+  const List = () => {
+    const { title, toDoList } = useSelector(state => ({
+      title: state.title,
+      toDoList: state.toDoList,
+    }))
+    const dispatch = useDispatch()
+    const { themeState, changeTheme } = useContext(ContextTheme)
+  
+    return (
+      <Container
+        style={{
+          marginTop: "70px",
+          border: "1px solid black",
+          background: themeState.background
+        }}
+        >
+        <Button onClick={changeTheme}>
+          Change Theme
+        </Button>
+        <h1>
+          <Badge>{title}</Badge>
+        </h1>
+        {toDoList.map((todo) => (
+          <CardItem key={todo.id} todo={todo} theme={themeState} />
+        ))}
+      <Button onClick={() => dispatch(addItemToDoList())}>
+        Add
       </Button>
-      {checked.checked && (
-        <Container>
-          <h1>
-            <Badge variant= "primary">{title}</Badge>
-          </h1>
-          <h3>Rendering title property from redux-store = {title}</h3>
-          <Row className="justify-content-md-center">
-            {items.map((item, key) => (
-              <CardItem key={key} item={item} visible={item.visible} />
-            ))}
-          </Row>
-        </Container>
-      )}
-    </>
-  );
-};
-const mapStateToProps = (state) => ({
-  title: state.title
-})
-
-export default connect(mapStateToProps)(Cards)
+      </Container>
+    )
+  }
+export default List
