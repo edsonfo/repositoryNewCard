@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addItem, deleteItem,deleteItemsToDoList } from '../actions/rootActions'
 
 import "./card.css";
 
 const CardItem = ({ todo }) => {
-  const { itemsFinish } = useSelector(state => ({
-    itemsFinish: state.itemsFinish
-  }))
-  const [todoState, setTodoState] = useState({ ...todo, checked: false })
+  const [todoState, setTodoState] = useState({ ...todo,message:'', checked: false })
   const dispatch = useDispatch()
   const handleOnChangeMessage = (prop) => (event) => {
     const {
@@ -39,7 +36,7 @@ const CardItem = ({ todo }) => {
       />
       <Button
         onClick={() => dispatch(deleteItemsToDoList())}
-        disabled={itemsFinish.length > 0 ? false : true}
+        disabled={!todoState.checked}
       >
         Delete
       </Button>
