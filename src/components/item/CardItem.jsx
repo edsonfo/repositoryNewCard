@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { InputGroup, FormControl, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
-import { addItem, deleteItem,deleteItemsToDoList } from '../actions/rootActions'
+import { addItem, deleteItem, deleteItemsToDoList } from '../actions/rootActions'
 
 import "./card.css";
 
@@ -48,4 +48,4 @@ CardItem.propTypes = {
   todo: PropTypes.object.isRequired,
 
 };
-export default CardItem;
+export default CardItem

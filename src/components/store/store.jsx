@@ -1,21 +1,23 @@
-import { createStore } from 'redux'
+import {applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import { ADD_ITEM_LIST,
   DELETE_ITEM_LIST,
   DELETE_ITEMS_TO_DO_LIST,
-  ADD_ITEM_TO_DO_LIST } from '../constants/roodConstants'
+  ADD_ITEM_TO_DO_LIST,
+  FETCH_POKEMONS_START,
+  FETCH_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_ERROR 
+  } from '../constants/roodConstants'
+
 
 const initialStore = {
     title: "TO DO LIST",
-    toDoList:  [
-        {
-          id: 1,
-          msm: "hi how are you?",
-        },
-      ],
-  itemsFinish: [],
-  countToDoList: 1
-
-}
+    toDoList:  [],
+    itemsFinish: [],
+    countToDoList: 0,
+    isLoading: false,
+    errorMessage: ''
+ }
 
 const deleteItemToDoList = state => {
   let newTodoList = state.toDoList
@@ -45,6 +47,7 @@ const reducer = (state = initialStore, action) => {
             toDoList: deleteItemToDoList(state),
             itemsFinish: []
           }
+
         case ADD_ITEM_TO_DO_LIST:
           return {
             ...state,
@@ -54,9 +57,37 @@ const reducer = (state = initialStore, action) => {
             }),
             countToDoList: state.countToDoList + 1
           }
+
+        case FETCH_POKEMONS_START:
+          return {
+            ...state,
+            errorMessage:'',
+            isLoading: true
+          }
+        
+
+        case FETCH_POKEMONS_SUCCESS:
+          const{ payload } = action
+          return {
+            ...state,
+            items:payload,
+            isLoading: false,
+            countItems: action.payload.length
+          }
+        
+
+        case FETCH_POKEMONS_ERROR: 
+          const{ error } = action
+          return {
+            ...state,
+            errorMessage: error,
+            isLoading: false
+          }
+        
+        
       default:
         return state
     }
   }
   
-  export default createStore(reducer)
+  export default createStore(reducer,applyMiddleware(thunk))
